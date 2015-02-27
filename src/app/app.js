@@ -1,3 +1,3 @@
 'use strict';
 
-angular.module('buche',['ngMessages'])
+angular.module('buche',['ngMessages']);

@@ -33,6 +33,17 @@ gulp.task('build-lib', ['partials'], function () {
     ])
       .pipe($.ngAnnotate())
       .pipe($.concat('buche.js'))
+      .pipe(gulp.dest(paths.dist + '/'))
+      .pipe($.size({ title: paths.dist + '/', showFiles: true }));
+});
+
+gulp.task('build-lib-min', ['partials'], function () {
+  return gulp.src([
+      paths.src + '/app/app.js',
+      paths.src + '/components/**/*.js',
+      paths.tmp + '/partials/**/*.js'
+    ])
+      .pipe($.ngAnnotate())
       .pipe($.uglify({preserveComments:$.uglifySaveLicense}))
       .pipe($.concat('buche.min.js'))
       .pipe(gulp.dest(paths.dist + '/'))
