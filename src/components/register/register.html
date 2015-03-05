@@ -1,6 +1,6 @@
 <div>
   <h2>Register</h2>
-  <form class="form" name="loginForm">
+  <form class="form" name="bucheRegisterForm">
     <div class="form-group">
       <input name="login" type="text" class="form-control" placeholder="username" ng-model="username" required></input>
     </div>
@@ -13,9 +13,9 @@
     <div class="form-group">
       <input type="password" class="form-control" placeholder="Password confirmation" ng-model="passwordConfirm" required></input>
     </div>
-    <div ng-messages="loginForm.result.$error">
+    <div ng-messages="bucheRegisterForm.result.$error">
       <div ng-message="credentials">Le mot de passe ne correspond pas a l'identifiant</div>
     </div>
-    <button class="btn btn-primary" ng-click="bucheRegisterCb()" ng-disabled="loginForm.$invalid">Register</button>
+    <button class="btn btn-primary" ng-click="bucheRegisterCb()" ng-disabled="bucheRegisterForm.$invalid">Register</button>
   </form>
 </div>

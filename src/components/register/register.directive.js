@@ -1,7 +1,7 @@
 angular.module( 'buche' )
   .directive('bucheRegister',function () {
     return {
-      scope: { 'bucheRegisterCb': '&' },
+      scope: false,
       restrict: 'EA',
       templateUrl: 'components/register/register.html',
       link: function ( $scope, $element, attrs ) {

@@ -1,10 +1,10 @@
 angular.module( 'buche' )
   .controller( 'MainCtrl', function ( $scope ) {
-    $scope.login = function (loginForm) {
+    $scope.login = function () {
       alert('yeah login');
-      loginForm.result = {$error: {credentials:true}};
-      loginForm.loginInput.$error = {doesntExist:true};
-      loginForm.passwordWarning = true;
+      $scope.bucheLoginForm.result = {$error: {credentials:true}};
+      $scope.bucheLoginForm.loginInput.$error = {doesntExist:true};
+      $scope.bucheLoginForm.passwordWarning = true;
     }
 
     $scope.register = function () {
