@@ -4,6 +4,18 @@ Buche is login and register form components library for angular.
 
 It tries to provide the best ux for login and register with minimal pain.
 
+## Installation
+
+``` bash
+bower install --save https://github.com/FranzPoize/buche.git#~0.0.1
+```
+
+In your app you'll have to add the buche module as a dependency
+
+``` javascript
+angular.module('yourModule',['buche']);
+```
+
 ## Login directive
 
 The login directive appropriately named `buche-login` provides a single template right set up in a bootstrap well.
