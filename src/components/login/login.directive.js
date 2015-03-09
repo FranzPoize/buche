@@ -13,15 +13,19 @@ angular.module( 'buche' )
 
         $scope.buchePasswordLength = attrs.buchePasswordLength ?
           parseInt(attrs.buchePasswordLength) :
-          $scope.buchePasswordLength;
+          8;
 
         $scope.forgotUsernameText = attrs.bucheForgotUsernameLn ?
           attrs.bucheForgotUsernameLn :
           "Forgotten your username ?";
 
+        $scope.forgotUsernameLink = attrs.forgotUsernameLink;
+
         $scope.forgotPasswordText = attrs.bucheForgotPasswordText ?
           attrs.bucheForgotPasswordText :
           "Forgotten your password ?";
+
+        $scope.forgotPasswordLink = attrs.forgotPasswordLink;
 
         $scope.checkPasswordForSecurity = attrs.bucheSecurityCheck ?
           $scope[bucheSecurityCheck] :
