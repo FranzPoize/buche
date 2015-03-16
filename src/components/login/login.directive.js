@@ -6,46 +6,28 @@ angular.module( 'buche' )
       templateUrl: 'components/login/login.html',
       controller: 'BucheLoginCtrl',
       link: function ( $scope, $element, attrs ) {
-        $scope.lengthWasEnough = false;
 
-        $scope.bucheLogin = attrs.bucheLoginCb ?
-          $scope[attrs.bucheLoginCb] : $scope.bucheLogin;
+        function loadAttributes( scopeName, attr, defaultValue ) {
 
-        $scope.buchePasswordLength = attrs.buchePasswordLength ?
-          parseInt(attrs.buchePasswordLength) :
-          8;
+          if (defaultValue)
+            $scope[scopeName] = defaultValue;
 
-        $scope.forgotUsernameText = attrs.bucheForgotUsernameLn ?
-          attrs.bucheForgotUsernameLn :
-          "Forgotten your username ?";
+          if ($scope[attr])
+            $scope[scopeName] = attr ? $scope[attr] : $scope[scopeName];
+          else
+            $scope[scopeName] = attr ? attr : $scope[scopeName];
 
-        $scope.forgotUsernameLink = attrs.forgotUsernameLink;
+        }
 
-        $scope.forgotPasswordText = attrs.bucheForgotPasswordText ?
-          attrs.bucheForgotPasswordText :
-          "Forgotten your password ?";
-
-        $scope.forgotPasswordLink = attrs.forgotPasswordLink;
-
-        $scope.checkPasswordForSecurity = attrs.bucheSecurityCheck ?
-          $scope[bucheSecurityCheck] :
-          function() { return false; };
-
-        $scope.bucheLoginTooltipPlacement = attrs.bucheLoginTooltipPlacement ?
-          attrs.bucheLoginTooltipPlacement :
-          "right";
-
-        $scope.buchePasswordTooltipPlacement = attrs.buchePasswordTooltipPlacement ?
-          attrs.buchePasswordTooltipPlacement :
-          "right";
-
-        $scope.bucheLoginTooltipText = attrs.bucheLoginTooltipText ?
-          attrs.bucheLoginTooltipText :
-          "Tooltip text";
-
-        $scope.buchePasswordTooltipText = attrs.buchePasswordTooltipText ?
-          attrs.buchePasswordTooltipText :
-          "Tooltip text";
+        loadAttributes('bucheLogin',attrs.bucheLoginCb);
+        loadAttributes('forgotUsernameText',attrs.bucheForgotUsernameText,'Forgotten your username ?');
+        loadAttributes('forgotUsernameLink',attrs.bucheForgotUsernameLink,'about:blank');
+        loadAttributes('forgotPasswordText',attrs.bucheForgotPasswordText,'Forgotten your password ?');
+        loadAttributes('forgotPasswordLink',attrs.bucheForgotPasswordLink,'about:blank');
+        loadAttributes('bucheLoginTooltipPlacement',attrs.bucheLoginTooltipPlacement,'right');
+        loadAttributes('bucheLoginTooltipText',attrs.bucheLoginTooltipText,'Tooltip text');
+        loadAttributes('buchePasswordTooltipPlacement',attrs.buchePasswordTooltipPlacement,'right');
+        loadAttributes('buchePasswordTooltipText',attrs.buchePasswordTooltipText,'Tooltip text');
 
         function setupTooltip( input ) {
 
@@ -71,27 +53,6 @@ angular.module( 'buche' )
 
         }
 
-        $scope.$watch('buchePassword', function ( newValue, oldValue ) {
-          if ( !$scope.lengthWasEnough && angular.isDefined(newValue)) {
-
-            if ( newValue.length < $scope.buchePasswordLength ||
-              scope.checkPasswordForSecurity( newValue )) {
-
-              $scope.bucheLoginForm.passwordInput.$error.passwordWarning = true;
-
-            } else {
-
-              $scope.lengthWasEnough = true;
-              $scope.bucheLoginForm.passwordInput.$error.passwordWarning = false;
-
-            }
-          } else if ( angular.isDefined( newValue ) ) {
-
-            $scope.bucheLoginForm.passwordInput.$error.passwordError = newValue.length < $scope.buchePasswordLength ||
-              $scope.checkPasswordForSecurity(newValue);
-
-          }
-        });
       }
     }
   })
