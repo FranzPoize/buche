@@ -25,7 +25,25 @@ gulp.task('partials', function () {
     .pipe(gulp.dest(paths.tmp + '/partials/'));
 });
 
-gulp.task('build-lib', ['partials'], function () {
+gulp.task('partials-lib', function() {
+  return gulp.src([
+    paths.src + '/components/**/*.html',
+    paths.tmp + '/components/**/*.html'
+  ])
+    .pipe($.minifyHtml({
+      empty: true,
+      spare: true,
+      quotes: true
+    }))
+    .pipe($.angularTemplatecache('templateCacheHtml.js', {
+      module: 'buche',
+      root:'components'
+    }))
+    .pipe(gulp.dest(paths.tmp + '/partials/'));
+
+})
+
+gulp.task('build-lib', ['partials-lib'], function () {
   return gulp.src([
       paths.src + '/app/app.js',
       paths.src + '/components/**/*.js',
@@ -37,7 +55,7 @@ gulp.task('build-lib', ['partials'], function () {
       .pipe($.size({ title: paths.dist + '/', showFiles: true }));
 });
 
-gulp.task('build-lib-min', ['partials'], function () {
+gulp.task('build-lib-min', ['partials-lib'], function () {
   return gulp.src([
       paths.src + '/app/app.js',
       paths.src + '/components/**/*.js',
@@ -111,3 +129,5 @@ gulp.task('clean', function (done) {
 });
 
 gulp.task('build', ['html', 'images', 'fonts', 'misc']);
+
+gulp.task('build-lib-all',['build-lib','build-lib-min']);
