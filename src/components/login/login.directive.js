@@ -15,7 +15,7 @@ angular.module( 'buche' )
           if ($scope[attr])
             $scope[scopeName] = attr ? $scope[attr] : $scope[scopeName];
           else
-            $scope[scopeName] = attr ? attr : $scope[scopeName];
+            $scope[scopeName] = (undefined !== attr) ? attr : $scope[scopeName];
 
         }
 
